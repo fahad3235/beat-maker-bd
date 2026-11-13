@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beat Maker BD — 16-step drum machine</title>
+<meta name="description" content="Offline bilingual EN/বাংলা 16-step drum machine for Bangladesh: tap the grid, press play, make your beat. No network, no account.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div>
+      <h1 id="appTitle">Beat Maker BD</h1>
+      <p id="appSubtitle" class="subtitle">16-step drum machine — tap the grid, press play, make your beat.</p>
+    </div>
+    <button id="langBtn" type="button" class="btn lang">বাংলা</button>
+  </header>
+
+  <main>
+    <section class="card transport" aria-label="Transport">
+      <button id="playBtn" type="button" class="btn play">▶ Play</button>
+      <div class="transport-readout">
+        <span id="playState" class="state">Stopped</span>
+        <span class="step-readout"><span id="stepLabelText">Step</span> <strong id="stepNow">–</strong> · <span id="beatLabelText">Beat</span> <strong id="beatNow">–</strong></span>
+      </div>
+      <div class="slider-group">
+        <label for="bpmSlider"><span id="bpmLabel">Tempo</span>: <strong id="bpmVal">120 BPM</strong></label>
+        <input id="bpmSlider" type="range" min="60" max="180" step="1" value="120">
+      </div>
+      <div class="slider-group">
+        <label for="swingSlider"><span id="swingLabel">Swing</span>: <strong id="swingVal">0%</strong></label>
+        <input id="swingSlider" type="range" min="0" max="60" step="5" value="0">
+      </div>
+      <p class="stats"><span id="hitCount">0 hits</span> · <span id="savedCount">0 saved</span></p>
+    </section>
+
+    <section class="card" aria-label="Sequencer">
+      <div class="grid-scroll">
+        <div id="grid" class="grid"></div>
+      </div>
+      <p class="hint" id="howBody">Tap squares to turn drum hits on or off. The 16 steps are one bar of 16th notes — shaded groups of 4 are the 4 beats. Press Play, change the tempo or swing while it plays, and save any beat you like.</p>
+    </section>
+
+    <section class="card" aria-label="Presets">
+      <h2 id="presetsTitle">Preset patterns</h2>
+      <div id="presetList" class="btn-row">
+        <button type="button" class="btn preset-btn" data-preset="four-on-floor">Four-on-Floor</button>
+        <button type="button" class="btn preset-btn" data-preset="boom-bap">Boom Bap</button>
+        <button type="button" class="btn preset-btn" data-preset="dhol-groove">Dhol Groove</button>
+        <button type="button" class="btn preset-btn" data-preset="half-time">Half-Time</button>
+      </div>
+    </section>
+
+    <section class="card" aria-label="My patterns">
+      <h2 id="myPatternsTitle">My patterns</h2>
+      <div class="save-row">
+        <input id="patternNameInput" type="text" maxlength="40" placeholder="Pattern name…" aria-label="Pattern name">
+        <button id="savePatternBtn" type="button" class="btn">Save pattern</button>
+      </div>
+      <div id="savedList" class="saved-list"></div>
+    </section>
+
+    <section class="card" aria-label="Tools">
+      <h2 id="toolsTitle">Tools</h2>
+      <div class="btn-row">
+        <button id="clearBtn" type="button" class="btn">Clear grid</button>
+        <button id="randomBtn" type="button" class="btn">Randomize</button>
+        <button id="exportBtn" type="button" class="btn">Export JSON</button>
+        <label id="importLabel" for="importFile" class="btn file-btn">Import JSON</label>
+        <input id="importFile" type="file" accept="application/json,.json" class="visually-hidden">
+      </div>
+      <p id="exportNote" class="note">Exports the current beat, tempo, swing and saved patterns.</p>
+      <div class="erase-box">
+        <p id="eraseHint" class="note">Type DELETE to erase all patterns, presets and settings.</p>
+        <div class="save-row">
+          <input id="eraseInput" type="text" maxlength="10" placeholder="DELETE" aria-label="Type DELETE to confirm erase">
+          <button id="eraseBtn" type="button" class="btn danger" disabled>Erase everything</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card how" aria-label="About">
+      <h2 id="howTitle">How to play</h2>
+      <p id="offlineNote">Fully offline — no network, no account, no uploads. Your beats stay on this device.</p>
+      <p id="synthNote">All drum sounds are synthesized live in your browser (Web Audio) — no audio files.</p>
+      <p class="note">Tip: press Space to play / stop. Tap a track name to mute it; use its slider for volume.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Beat Maker BD — an offline toy drum machine. Preset patterns are original. Made for learning rhythm.</p>
+  </footer>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="core.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
